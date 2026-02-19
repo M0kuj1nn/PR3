@@ -10,7 +10,7 @@ class Artifact(ABC):
     @abstractmethod
     def type_name(self):
         """Возвращает название типа объекта."""
-        pass
+
 
     # метод который обязан релизовать класс наследник
     # для сверки и возвращения content/author/country

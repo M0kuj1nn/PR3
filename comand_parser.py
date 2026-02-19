@@ -34,6 +34,7 @@ class CommandProcessor:
 
         if line == "PRINT":
             return self.repo.print_all()
+        return print("Недопустимая команда в файле:", line)
 
     def parse_args(self, arg_string: str):
         """Парсит строку аргументов вида key="value";key2="value2" в словарь."""
@@ -67,7 +68,7 @@ class CommandProcessor:
 
         self.repo.add(obj)
 
-    #делим строку на аттрибут и значение, очищаем от пробелов и кавычек 
+    #делим строку на аттрибут и значение, очищаем от пробелов и кавычек
     #значение, вызываем remove_by_condition
     def process_rem(self, data: str):
         """Обрабатывает команду REM, удаляя объекты из репозитория по условию."""
