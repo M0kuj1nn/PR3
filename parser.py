@@ -4,6 +4,7 @@ from repository import Repository
 
 
 class CommandProcessor:
+    """Класс для обработки команд из файла (ADD, REM, PRINT)."""
     def __init__(self):
         #создаем компазицию, когда CP будет внутри содержать Repo
         self.repo = Repository()

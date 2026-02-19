@@ -1,8 +1,8 @@
 """Модуль с классами артефактов (афоризмы и пословицы)."""
 from abc import ABC, abstractmethod
 
-#Базовый класс от которого наследуем афоризмы и пословицы
 class Artifact(ABC):
+    """Абстрактный базовый класс для всех артефактов."""
     def __init__(self, content: str):
         self.content = content
 
@@ -11,7 +11,8 @@ class Artifact(ABC):
     def type_name(self):
         pass
 
-    # метод который обязан релизовать класс наследник для сверки и возвращения content/author/country
+    # метод который обязан релизовать класс наследник 
+    # для сверки и возвращения content/author/country
     @abstractmethod
     def matches_condition(self, attr, value):
         """Проверка условия для REM"""
@@ -23,6 +24,7 @@ class Artifact(ABC):
 
 
 class Aphorism(Artifact):
+    """Класс афоризма. Содержит текст и автора."""
     def __init__(self, content: str, author: str):
         super().__init__(content)
         self.author = author
@@ -42,6 +44,7 @@ class Aphorism(Artifact):
 
 
 class Proverb(Artifact):
+    """Класс пословицы. Содержит текст и страну происхождения."""
     def __init__(self, content: str, country: str):
         super().__init__(content)
         self.country = country
