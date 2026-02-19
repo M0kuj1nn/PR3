@@ -9,14 +9,15 @@ class Artifact(ABC):
     #метод который обязан релизовать класс наследник для возрата типа (aphorism, proverb)
     @abstractmethod
     def type_name(self):
+        """Возвращает название типа объекта."""
         pass
 
-    # метод который обязан релизовать класс наследник 
+    # метод который обязан релизовать класс наследник
     # для сверки и возвращения content/author/country
     @abstractmethod
     def matches_condition(self, attr, value):
         """Проверка условия для REM"""
-        pass
+
 
     #для преобразования контента объекта в строку
     def __str__(self):
