@@ -11,10 +11,11 @@ class CommandProcessor:
 
 
     def process_line(self, line: str):
+        """Обрабатывает строку команды."""
         #чистим от пробелов
         line = line.strip()
         if not line:
-            return
+            return None #!!
 
         #Проверяем начало строки на команду при помощи startswith
         #берем строку от 5 символа, чистим от пробелов и вызываем нужный метод.
@@ -35,7 +36,7 @@ class CommandProcessor:
             return self.repo.print_all()
 
     def parse_args(self, arg_string: str):
-        #Разбираем на кортеж параметры вида key="value";key2="value2"
+        """Парсит строку аргументов вида key="value";key2="value2" в словарь."""
         result = {}
         parts = arg_string.split(";")
         for part in parts:
@@ -47,7 +48,9 @@ class CommandProcessor:
 
     #смотрим на тип команды, создаем на ее основе объект класса.
     def process_add(self, data: str):
-        #разбиваем строку APHORISM;content="Жизнь — это движение";author="Аристотель" на два, тип фразы отпраляем в type_name
+        """Обрабатывает команду ADD, создавая объект и добавляя его в репозиторий."""
+        #разбиваем строку APHORISM;content="Жизнь — это движение";author="Аристотель"
+        #на два, тип фразы отпраляем в type_name
         #аргументы цельной строкой отправляем в args
         type_name, args = data.split(";", 1)
 
@@ -64,14 +67,17 @@ class CommandProcessor:
 
         self.repo.add(obj)
 
-    #делим строку на аттрибут и значение, очищаем от пробелов и кавычек значение, вызываем remove_by_condition
+    #делим строку на аттрибут и значение, очищаем от пробелов и кавычек 
+    #значение, вызываем remove_by_condition
     def process_rem(self, data: str):
+        """Обрабатывает команду REM, удаляя объекты из репозитория по условию."""
         # пример: content~"abc"
         attr, value = data.split("~")
         value = value.strip().strip("\"")
         self.repo.remove_by_condition(attr, value)
 
     def execute_file(self, filename):
+        """Читает команды из файла и выполняет их."""
         with open(filename, "r", encoding="utf-8") as f:
             for line in f:
                 self.process_line(line)
