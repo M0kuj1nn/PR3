@@ -20,19 +20,11 @@ class Artifact(ABC):
     def type_name(self):
         """Возвращает название типа объекта."""
 
-
     # метод который обязан релизовать класс наследник
     # для сверки и возвращения content/author/country
     @abstractmethod
     def matches_condition(self, attr, value):
         """Проверка условия для REM"""
-
-    def matches_condition(self, attr, value):
-        """Универсальная проверка условия."""
-        if hasattr(self, attr):
-            return value in str(getattr(self, attr))
-        return False
-
 
     #для преобразования контента объекта в строку
     def __str__(self):
@@ -48,6 +40,12 @@ class Aphorism(Artifact):
     def type_name(self):
         return "APHORISM"
 
+    def matches_condition(self, attr, value):
+        """Универсальная проверка условия."""
+        if hasattr(self, attr):
+            return value in str(getattr(self, attr))
+        return False
+
     def __str__(self):
         return f"[APHORISM] content=\"{self.content}\" author=\"{self.author}\""
 
@@ -60,6 +58,12 @@ class Proverb(Artifact):
 
     def type_name(self):
         return "PROVERB"
+
+    def matches_condition(self, attr, value):
+        """Универсальная проверка условия."""
+        if hasattr(self, attr):
+            return value in str(getattr(self, attr))
+        return False
 
     def __str__(self):
         return f"[PROVERB] content=\"{self.content}\" country=\"{self.country}\""
