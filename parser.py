@@ -1,3 +1,4 @@
+"""Модуль для парсинга команд из файла и их выполнения."""
 from classes import Aphorism, Proverb
 from repository import Repository
 

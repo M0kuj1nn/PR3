@@ -1,3 +1,4 @@
+"""Точка входа в программу. Запускает обработку файла с командами."""
 from parser import CommandProcessor
 
 def main():
