@@ -6,6 +6,15 @@ class Artifact(ABC):
     def __init__(self, content: str):
         self.content = content
 
+    @staticmethod
+    def create(type_name: str, **kwargs):
+        """Фабричный метод создания артефактов."""
+        if type_name == "APHORISM":
+            return Aphorism(content=kwargs["content"], author=kwargs["author"])
+        if type_name == "PROVERB":
+            return Proverb(content=kwargs["content"], country=kwargs["country"])
+        raise ValueError(f"Неизвестный тип: {type_name}")
+
     #метод который обязан релизовать класс наследник для возрата типа (aphorism, proverb)
     @abstractmethod
     def type_name(self):

@@ -1,5 +1,5 @@
 """Модуль для парсинга команд из файла и их выполнения."""
-from classes import Aphorism, Proverb
+from classes import Artifact
 from repository import Repository
 
 
@@ -58,15 +58,11 @@ class CommandProcessor:
         #делаем из аргементов кортеж
         args = self.parse_args(args)
 
-        if type_name == "APHORISM":
-            obj = Aphorism(content=args["content"], author=args["author"])
-        elif type_name == "PROVERB":
-            obj = Proverb(content=args["content"], country=args["country"])
-        else:
-            print("Недопустимое значение в файле:", type_name)
-            return
-
-        self.repo.add(obj)
+        try:
+            obj = Artifact.create(type_name, **args)
+            self.repo.add(obj)
+        except ValueError as e:
+            print(e)
 
     #делим строку на аттрибут и значение, очищаем от пробелов и кавычек
     #значение, вызываем remove_by_condition
