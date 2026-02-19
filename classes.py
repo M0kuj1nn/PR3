@@ -1,0 +1,59 @@
+from abc import ABC, abstractmethod
+
+#Базовый класс от которого наследуем афоризмы и пословицы
+class Artifact(ABC):
+    def __init__(self, content: str):
+        self.content = content
+
+    #метод который обязан релизовать класс наследник для возрата типа (aphorism, proverb)
+    @abstractmethod
+    def type_name(self):
+        pass
+
+    # метод который обязан релизовать класс наследник для сверки и возвращения content/author/country
+    @abstractmethod
+    def matches_condition(self, attr, value):
+        """Проверка условия для REM"""
+        pass
+
+    #для преобразования контента объекта в строку
+    def __str__(self):
+        return f"[{self.type_name()}] content=\"{self.content}\""
+
+
+class Aphorism(Artifact):
+    def __init__(self, content: str, author: str):
+        super().__init__(content)
+        self.author = author
+
+    def type_name(self):
+        return "APHORISM"
+
+    def matches_condition(self, attr, value):
+        if attr == "content":
+            return value in self.content
+        if attr == "author":
+            return value in self.author
+        return False
+
+    def __str__(self):
+        return f"[APHORISM] content=\"{self.content}\" author=\"{self.author}\""
+
+
+class Proverb(Artifact):
+    def __init__(self, content: str, country: str):
+        super().__init__(content)
+        self.country = country
+
+    def type_name(self):
+        return "PROVERB"
+
+    def matches_condition(self, attr, value):
+        if attr == "content":
+            return value in self.content
+        if attr == "country":
+            return value in self.country
+        return False
+
+    def __str__(self):
+        return f"[PROVERB] content=\"{self.content}\" country=\"{self.country}\""
