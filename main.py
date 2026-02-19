@@ -1,7 +1,8 @@
 """Точка входа в программу. Запускает обработку файла с командами."""
-from parser import CommandProcessor
+from comand_parser import CommandProcessor
 
 def main():
+    """Главная функция для запуска программы."""
     cp = CommandProcessor()
     cp.execute_file("artifact.txt")
 
