@@ -10,7 +10,7 @@ class CommandProcessor:
         self.repo = Repository()
 
 
-    def process_line(self, line: str):
+    def process_line(self, line: str) -> None:
         """Обрабатывает строку команды."""
         #чистим от пробелов
         line = line.strip()
@@ -73,7 +73,7 @@ class CommandProcessor:
         value = value.strip().strip("\"")
         self.repo.remove_by_condition(attr, value)
 
-    def execute_file(self, filename):
+    def execute_file(self, filename: str) -> None:
         """Читает команды из файла и выполняет их."""
         with open(filename, "r", encoding="utf-8") as f:
             for line in f:
