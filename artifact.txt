@@ -7,3 +7,4 @@ REM content~"рыбку"
 PRINT
 REM author~"Аристотель"
 PRINT
+UNKCOMMAND APHORISM;content="Чтобы дойти до цели, надо прежде всего идти";author="Оноре де Бальзак"
